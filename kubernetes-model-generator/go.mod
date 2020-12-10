@@ -4,10 +4,10 @@ go 1.14
 
 require (
 	github.com/openshift/api v0.0.0-20200413201024-c6e8c9b6eb9a
-	k8s.io/api v0.18.0
+	k8s.io/api v0.19.4
 	k8s.io/apiextensions-apiserver v0.18.0
-	k8s.io/apimachinery v0.18.0
-	k8s.io/client-go v0.18.0
+	k8s.io/apimachinery v0.19.4
+	k8s.io/client-go v0.19.4
 	k8s.io/kubernetes v1.18.0
 	k8s.io/metrics v0.18.0
 )
@@ -35,3 +35,5 @@ exclude (
 	k8s.io/metrics v0.0.0
 	k8s.io/sample-apiserver v0.0.0
 )
+
+replace k8s.io/cloud-provider => k8s.io/cloud-provider v0.19.4

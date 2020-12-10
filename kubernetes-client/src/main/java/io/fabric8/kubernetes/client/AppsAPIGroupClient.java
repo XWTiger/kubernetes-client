@@ -15,26 +15,17 @@
  */
 package io.fabric8.kubernetes.client;
 
-import io.fabric8.kubernetes.api.model.apps.DaemonSet;
-import io.fabric8.kubernetes.api.model.apps.DaemonSetList;
+import io.fabric8.kubernetes.api.model.apps.*;
 import io.fabric8.kubernetes.api.model.apps.DoneableDaemonSet;
-import io.fabric8.kubernetes.api.model.apps.Deployment;
-import io.fabric8.kubernetes.api.model.apps.DeploymentList;
 import io.fabric8.kubernetes.api.model.apps.DoneableDeployment;
-import io.fabric8.kubernetes.api.model.apps.ReplicaSet;
-import io.fabric8.kubernetes.api.model.apps.ReplicaSetList;
 import io.fabric8.kubernetes.api.model.apps.DoneableReplicaSet;
-import io.fabric8.kubernetes.api.model.apps.StatefulSet;
-import io.fabric8.kubernetes.api.model.apps.StatefulSetList;
 import io.fabric8.kubernetes.api.model.apps.DoneableStatefulSet;
+import io.fabric8.kubernetes.api.model.apps.DoneableTidbCluster;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
 import io.fabric8.kubernetes.client.dsl.Resource;
 import io.fabric8.kubernetes.client.dsl.MixedOperation;
 import io.fabric8.kubernetes.client.dsl.AppsAPIGroupDSL;
-import io.fabric8.kubernetes.client.dsl.internal.apps.v1.DaemonSetOperationsImpl;
-import io.fabric8.kubernetes.client.dsl.internal.apps.v1.DeploymentOperationsImpl;
-import io.fabric8.kubernetes.client.dsl.internal.apps.v1.ReplicaSetOperationsImpl;
-import io.fabric8.kubernetes.client.dsl.internal.apps.v1.StatefulSetOperationsImpl;
+import io.fabric8.kubernetes.client.dsl.internal.apps.v1.*;
 
 import okhttp3.OkHttpClient;
 
@@ -66,5 +57,10 @@ public class AppsAPIGroupClient extends BaseClient implements AppsAPIGroupDSL {
   @Override
   public MixedOperation<StatefulSet, StatefulSetList, DoneableStatefulSet, RollableScalableResource<StatefulSet, DoneableStatefulSet>> statefulSets() {
     return new StatefulSetOperationsImpl(httpClient, getConfiguration());
+  }
+
+  @Override
+  public MixedOperation<TidbCluster, TidbClusterList, DoneableTidbCluster, RollableScalableResource<TidbCluster, DoneableTidbCluster>> tidbClusters() {
+    return new TidbClusterOperationsImpl(httpClient, getConfiguration());
   }
 }

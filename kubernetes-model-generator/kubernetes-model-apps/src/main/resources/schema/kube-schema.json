@@ -399,6 +399,10 @@
           "type": "string",
           "description": ""
         },
+        "resourceVersionMatch": {
+          "type": "string",
+          "description": ""
+        },
         "timeoutSeconds": {
           "type": "integer",
           "description": "",
@@ -1246,6 +1250,190 @@
       "javaInterfaces": [
         "io.fabric8.kubernetes.api.model.KubernetesResource"
       ]
+    },
+    "kubernetes_apps_TidbClusterList": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "pingcap.com/v1alpha1",
+          "required": true
+        },
+        "items": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_apps_TidbCluster",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.TidbCluster"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "TidbClusterList",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ListMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ListMeta"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterList",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource",
+        "io.fabric8.kubernetes.api.model.KubernetesResourceList\u003cio.fabric8.kubernetes.api.model.apps.TidbCluster\u003e"
+      ]
+    },
+    "kubernetes_apps_TidbCluster": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "pingcap.com/v1alpha1",
+          "required": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "TidbCluster",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ObjectMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbClusterSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterSpec"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbCluster",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.HasMetadata",
+        "io.fabric8.kubernetes.api.model.Namespaced"
+      ]
+    },
+    "kubernetes_apps_TidbClusterSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "",
+          "default": "v4.0.8",
+          "required": true
+        },
+        "timezone": {
+          "type": "string",
+          "description": "",
+          "default": "UTC"
+        },
+        "pvReclaimPolicy": {
+          "type": "string",
+          "description": "",
+          "default": "Retain",
+          "required": true
+        },
+        "enableDynamicConfiguration": {
+          "type": "boolean",
+          "description": "",
+          "default": true,
+          "required": true
+        },
+        "configUpdateStrategy": {
+          "type": "string",
+          "description": "",
+          "default": "RollingUpdate",
+          "required": true
+        },
+        "discovery": {
+          "type": "any",
+          "description": ""
+        },
+        "pd": {
+          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
+        },
+        "tikv": {
+          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
+        },
+        "tidb": {
+          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterSpec"
+    },
+    "kubernetes_apps_TidbContentTemplate": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "config": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "storage": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "reserve-space": {
+                  "type": "string",
+                  "description": "MB",
+                  "default": "0MB"
+                }
+              },
+              "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemConfigStorage"
+            }
+          },
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemConfig"
+        },
+        "service": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "",
+              "default": "ClusterIP"
+            }
+          },
+          "additionalProperties": true,
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbService"
+        },
+        "requests":{
+          "type": "object",
+          "description": "",
+          "properties": {
+            "storage": {
+              "type": "string",
+              "description": "",
+              "default": "1Gi",
+              "required": true
+            }
+          },
+          "additionalProperties": true,
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbRequests"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemplate"
     },
     "kubernetes_apps_Deployment": {
       "type": "object",
@@ -3632,6 +3820,25 @@
         "io.fabric8.kubernetes.api.model.KubernetesResource"
       ]
     },
+    "kubernetes_core_EphemeralVolumeSource": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "readOnly": {
+          "type": "boolean",
+          "description": ""
+        },
+        "volumeClaimTemplate": {
+          "$ref": "#/definitions/kubernetes_core_PersistentVolumeClaimTemplate",
+          "javaType": "io.fabric8.kubernetes.api.model.PersistentVolumeClaimTemplate"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.EphemeralVolumeSource",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource"
+      ]
+    },
     "kubernetes_core_ExecAction": {
       "type": "object",
       "description": "",
@@ -5314,6 +5521,26 @@
         "io.fabric8.kubernetes.api.model.KubernetesResource"
       ]
     },
+    "kubernetes_core_PersistentVolumeClaimTemplate": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ObjectMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kubernetes_core_PersistentVolumeClaimSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.PersistentVolumeClaimSpec"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.PersistentVolumeClaimTemplate",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.HasMetadata",
+        "io.fabric8.kubernetes.api.model.Namespaced"
+      ]
+    },
     "kubernetes_core_PersistentVolumeClaimVolumeSource": {
       "type": "object",
       "description": "",
@@ -5967,6 +6194,10 @@
           "$ref": "#/definitions/kubernetes_core_SELinuxOptions",
           "javaType": "io.fabric8.kubernetes.api.model.SELinuxOptions"
         },
+        "seccompProfile": {
+          "$ref": "#/definitions/kubernetes_core_SeccompProfile",
+          "javaType": "io.fabric8.kubernetes.api.model.SeccompProfile"
+        },
         "supplementalGroups": {
           "type": "array",
           "description": "",
@@ -6151,6 +6382,10 @@
         },
         "serviceAccountName": {
           "type": "string",
+          "description": ""
+        },
+        "setHostnameAsFQDN": {
+          "type": "boolean",
           "description": ""
         },
         "shareProcessNamespace": {
@@ -7151,6 +7386,25 @@
         "io.fabric8.kubernetes.api.model.KubernetesResource"
       ]
     },
+    "kubernetes_core_SeccompProfile": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "localhostProfile": {
+          "type": "string",
+          "description": ""
+        },
+        "type": {
+          "type": "string",
+          "description": ""
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.SeccompProfile",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource"
+      ]
+    },
     "kubernetes_core_Secret": {
       "type": "object",
       "description": "",
@@ -7403,6 +7657,10 @@
         "seLinuxOptions": {
           "$ref": "#/definitions/kubernetes_core_SELinuxOptions",
           "javaType": "io.fabric8.kubernetes.api.model.SELinuxOptions"
+        },
+        "seccompProfile": {
+          "$ref": "#/definitions/kubernetes_core_SeccompProfile",
+          "javaType": "io.fabric8.kubernetes.api.model.SeccompProfile"
         },
         "windowsOptions": {
           "$ref": "#/definitions/kubernetes_core_WindowsSecurityContextOptions",
@@ -8009,6 +8267,10 @@
           "$ref": "#/definitions/kubernetes_core_EmptyDirVolumeSource",
           "javaType": "io.fabric8.kubernetes.api.model.EmptyDirVolumeSource"
         },
+        "ephemeral": {
+          "$ref": "#/definitions/kubernetes_core_EphemeralVolumeSource",
+          "javaType": "io.fabric8.kubernetes.api.model.EphemeralVolumeSource"
+        },
         "fc": {
           "$ref": "#/definitions/kubernetes_core_FCVolumeSource",
           "javaType": "io.fabric8.kubernetes.api.model.FCVolumeSource"
@@ -8234,6 +8496,10 @@
           "$ref": "#/definitions/kubernetes_core_EmptyDirVolumeSource",
           "javaType": "io.fabric8.kubernetes.api.model.EmptyDirVolumeSource"
         },
+        "ephemeral": {
+          "$ref": "#/definitions/kubernetes_core_EphemeralVolumeSource",
+          "javaType": "io.fabric8.kubernetes.api.model.EphemeralVolumeSource"
+        },
         "fc": {
           "$ref": "#/definitions/kubernetes_core_FCVolumeSource",
           "javaType": "io.fabric8.kubernetes.api.model.FCVolumeSource"
@@ -8452,6 +8718,14 @@
     "DeploymentList": {
       "$ref": "#/definitions/kubernetes_apps_DeploymentList",
       "javaType": "io.fabric8.kubernetes.api.model.apps.DeploymentList"
+    },
+    "TidbCluster": {
+      "$ref": "#/definitions/kubernetes_apps_TidbCluster",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbCluster"
+    },
+    "TidbClusterList": {
+      "$ref": "#/definitions/kubernetes_apps_TidbClusterList",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterList"
     },
     "EndpointPort": {
       "$ref": "#/definitions/kubernetes_core_EndpointPort",
