@@ -31,6 +31,18 @@
   <properties>
     <clone-kube>true</clone-kube>
   </properties>
+  <distributionManagement>
+    <repository>
+      <id>sugon-nexus</id>
+      <name>public</name>
+      <url>http://10.0.100.59:9996/repository/maven-releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>sugon-nexus-snapshots</id>
+      <name>sugon-snapshot</name>
+      <url>http://10.0.100.59:9996/repository/sugon/</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
