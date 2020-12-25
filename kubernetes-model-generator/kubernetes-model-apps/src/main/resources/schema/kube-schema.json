@@ -1352,6 +1352,10 @@
           "default": "RollingUpdate",
           "required": true
         },
+        "helper": {
+          "$ref": "#/definitions/kubernetes_apps_TidbHelper",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterHelper"
+        },
         "discovery": {
           "type": "any",
           "description": ""
@@ -1368,6 +1372,21 @@
       },
       "additionalProperties": true,
       "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterSpec"
+    },
+    "kubernetes_apps_TidbHelper": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "",
+          "default": "busybox:1.26.2",
+          "required": true
+        }
+      },
+      "required": true,
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterHelper"
     },
     "kubernetes_apps_TidbContentTemplate": {
       "type": "object",
