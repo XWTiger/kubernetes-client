@@ -3,6 +3,326 @@
   "$schema": "http://json-schema.org/schema#",
   "$module": "apps",
   "definitions": {
+    "istio_VirtualServiceList": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "networking.istio.io/v1alpha3",
+          "required": true
+        },
+        "items": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_VirtualService",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualService"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "VirtualService",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ListMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ListMeta"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualServiceList",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource",
+        "io.fabric8.kubernetes.api.model.KubernetesResourceList\u003cio.fabric8.kubernetes.api.model.apps.istio.VirtualService\u003e"
+      ]
+    },
+    "istio_VirtualService": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "networking.istio.io/v1alpha3",
+          "required": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "VirtualService",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ObjectMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/istio_VirtualServiceSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualServiceSpec"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualService",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.HasMetadata",
+        "io.fabric8.kubernetes.api.model.Namespaced"
+      ]
+    },
+    "istio_VirtualServiceSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "hosts": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "gateways": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "http": {
+          "$ref": "#/definitions/istio_HttpRoute",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
+        }
+      }
+    },
+    "istio_HttpRoute": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "match": {
+          "type": "array",
+          "description": "",
+          "required": false,
+          "items": {
+            "$ref": "#/definitions/istio_HttpMathRequests",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpMathRequest"
+          }
+        },
+        "route": {
+          "$ref": "#/definitions/istio_HTTPRouteDestination",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRouteDestination",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
+    },
+    "istio_HTTPRouteDestination": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "destination": {
+          "$ref": "#/definitions/istio_Destination",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Destination",
+          "required": true
+        },
+        "weight": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "headers": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "request": {
+              "$ref": "#/definitions/istio_HeaderOperations",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HeaderOperations",
+              "required": false
+            },
+            "response": {
+              "$ref": "#/definitions/istio_HeaderOperations",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HeaderOperations",
+              "required": false
+            }
+          },
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRouteDestination",
+      "required": false
+    },
+    "istio_HeaderOperations": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "set": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "add": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "remove": {
+          "type": "array",
+          "description": "",
+          "required": false,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        }
+      },
+      "required": false,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HeaderOperations"
+    },
+    "istio_Destination": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "subset": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "port": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "number": {
+              "type": "integer",
+              "description": "",
+              "required": false,
+              "javaType": "Integer"
+            }
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Destination",
+      "required": false
+    },
+    "istio_HttpMathRequests": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "uri": {
+          "$ref": "#/definitions/istio_StringMatch",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+        },
+        "scheme": {
+          "$ref": "#/definitions/istio_StringMatch",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+        },
+        "method": {
+          "$ref": "#/definitions/istio_StringMatch",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+        },
+        "authority": {
+          "$ref": "#/definitions/istio_StringMatch",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+        },
+        "headers": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,io.fabric8.kubernetes.api.model.apps.istio.StringMatch\u003e"
+        },
+        "port": {
+          "type": "integer",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "sourceLabels": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "gateways": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "queryParams": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,io.fabric8.kubernetes.api.model.apps.istio.StringMatch\u003e"
+        },
+        "ignoreUriCase": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "withoutHeaders": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,io.fabric8.kubernetes.api.model.apps.istio.StringMatch\u003e"
+        },
+        "sourceNamespace": {
+          "type": "string",
+          "description": "",
+          "javaType": "String",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpMathRequest",
+      "required": false
+    },
+    "istio_StringMatch": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "exact": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "prefix": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "regex": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch",
+      "required": false
+    },
     "k8s_io_apimachinery_pkg_api_resource_Quantity": {
       "type": "object",
       "description": "",
@@ -8909,6 +9229,14 @@
     "UpdateOptions": {
       "$ref": "#/definitions/kubernetes_apimachinery_UpdateOptions",
       "javaType": "io.fabric8.kubernetes.api.model.UpdateOptions"
+    },
+    "VirtualService": {
+      "$ref": "#/definitions/istio_VirtualService",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualService"
+    },
+    "VirtualServiceList": {
+      "$ref": "#/definitions/istio_VirtualServiceList",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualServiceList"
     }
   },
   "additionalProperties": true
