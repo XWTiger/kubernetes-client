@@ -16,15 +16,16 @@
 
 package io.fabric8.kubernetes.client.dsl;
 
+
 import io.fabric8.kubernetes.api.model.apps.*;
 import io.fabric8.kubernetes.api.model.apps.DoneableDaemonSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableDeployment;
 import io.fabric8.kubernetes.api.model.apps.DoneableReplicaSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableStatefulSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableTidbCluster;
+import io.fabric8.kubernetes.api.model.apps.istio.*;
+import io.fabric8.kubernetes.api.model.apps.istio.DoneableGateWay;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableVirtualService;
-import io.fabric8.kubernetes.api.model.apps.istio.VirtualService;
-import io.fabric8.kubernetes.api.model.apps.istio.VirtualServiceList;
 import io.fabric8.kubernetes.client.Client;
 
 public interface AppsAPIGroupDSL extends Client {
@@ -40,4 +41,6 @@ public interface AppsAPIGroupDSL extends Client {
   MixedOperation<TidbCluster, TidbClusterList, DoneableTidbCluster, RollableScalableResource<TidbCluster, DoneableTidbCluster>> tidbClusters();
 
   MixedOperation<VirtualService, VirtualServiceList, DoneableVirtualService, RollableScalableResource<VirtualService, DoneableVirtualService>> virtualServices();
+
+  MixedOperation<GateWay, GateWayList, DoneableGateWay, RollableScalableResource<GateWay, DoneableGateWay>> gateways();
 }

@@ -21,15 +21,16 @@ import io.fabric8.kubernetes.api.model.apps.DoneableDeployment;
 import io.fabric8.kubernetes.api.model.apps.DoneableReplicaSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableStatefulSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableTidbCluster;
+import io.fabric8.kubernetes.api.model.apps.istio.*;
+import io.fabric8.kubernetes.api.model.apps.istio.DoneableGateWay;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableVirtualService;
-import io.fabric8.kubernetes.api.model.apps.istio.VirtualService;
-import io.fabric8.kubernetes.api.model.apps.istio.VirtualServiceList;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
 import io.fabric8.kubernetes.client.dsl.Resource;
 import io.fabric8.kubernetes.client.dsl.MixedOperation;
 import io.fabric8.kubernetes.client.dsl.AppsAPIGroupDSL;
 import io.fabric8.kubernetes.client.dsl.internal.apps.v1.*;
 
+import io.fabric8.kubernetes.client.dsl.istio.GateWayOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.VirtualServiceOperationsImpl;
 import okhttp3.OkHttpClient;
 
@@ -71,5 +72,10 @@ public class AppsAPIGroupClient extends BaseClient implements AppsAPIGroupDSL {
   @Override
   public MixedOperation<VirtualService, VirtualServiceList, DoneableVirtualService, RollableScalableResource<VirtualService, DoneableVirtualService>> virtualServices() {
     return new VirtualServiceOperationsImpl(httpClient, getConfiguration());
+  }
+
+  @Override
+  public MixedOperation<GateWay, GateWayList, DoneableGateWay, RollableScalableResource<GateWay, DoneableGateWay>> gateways() {
+    return new GateWayOperationsImpl(httpClient, getConfiguration());
   }
 }

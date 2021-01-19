@@ -3,6 +3,245 @@
   "$schema": "http://json-schema.org/schema#",
   "$module": "apps",
   "definitions": {
+    "istio_GateWayList": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "networking.istio.io/v1alpha3",
+          "required": true
+        },
+        "items": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_GateWay",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWay"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "Gateway",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ListMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ListMeta"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayList",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource",
+        "io.fabric8.kubernetes.api.model.KubernetesResourceList\u003cio.fabric8.kubernetes.api.model.apps.istio.GateWay\u003e"
+      ]
+    },
+    "istio_GateWay":{
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "networking.istio.io/v1alpha3",
+          "required": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "Gateway",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/kubernetes_apimachinery_ObjectMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/istio_GateWaySpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayGWSpec"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWay",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.HasMetadata",
+        "io.fabric8.kubernetes.api.model.Namespaced"
+      ]
+    },
+    "istio_GateWaySpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "description": "",
+          "required": true,
+          "items": {
+            "$ref": "#/definitions/istio_gateway_Server",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayServer"
+          }
+        },
+        "selector": {
+          "type": "object",
+          "description": "",
+          "required": true,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayGWSpec",
+      "required": true
+    },
+    "istio_gateway_Server": {
+      "type": "object",
+      "description": "",
+      "required": true,
+      "properties": {
+        "port": {
+          "$ref": "#/definitions/istio_gateway_ServerPort",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayServerPort"
+        },
+        "hosts":{
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          },
+          "required": true
+        },
+        "tls": {
+          "$ref": "#/definitions/istio_gateway_ServerTLSSetting",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayServerTLSSetting"
+        },
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        }
+
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayServer"
+    },
+    "istio_gateway_ServerPort": {
+      "type": "object",
+      "description": "",
+      "required": true,
+      "properties": {
+        "number": {
+          "type": "object",
+          "description": "",
+          "required": true,
+          "javaType": "Integer"
+        },
+        "protocol": {
+          "type" : "string",
+          "enum" : ["HTTP", "HTTPS", "GRPC","HTTP2","MONGO","TCP", "TLS"],
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "targetPort": {
+          "type": "object",
+          "description": "",
+          "required": true,
+          "javaType": "Integer"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayServerPort"
+    },
+    "istio_gateway_ServerTLSSetting": {
+      "type": "object",
+      "description": "",
+      "required": false,
+      "properties": {
+        "httpsRedirect": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "mode":{
+          "type" : "string",
+          "enum" : ["PASSTHROUGH", "SIMPLE", "MUTUAL","AUTO_PASSTHROUGH","ISTIO_MUTUAL"],
+          "required": false
+        },
+        "serverCertificate":{
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "privateKey":{
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "caCertificates":{
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "credentialName":{
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "subjectAltNames":{
+          "type": "array",
+          "required": false,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "verifyCertificateHash":{
+          "type": "array",
+          "required": false,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "verifyCertificateSpki":{
+          "type": "array",
+          "required": false,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "cipherSuites":{
+          "type": "array",
+          "required": false,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "minProtocolVersion": {
+          "type" : "string",
+          "enum" : ["TLS_AUTO", "TLSV1_0", "TLSV1_1","TLSV1_2","TLSV1_3"],
+          "required": false
+        },
+        "maxProtocolVersion": {
+          "type" : "string",
+          "enum" : ["TLS_AUTO", "TLSV1_0", "TLSV1_1","TLSV1_2","TLSV1_3"],
+          "required": false
+        }
+
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayServerTLSSetting"
+    },
     "istio_VirtualServiceList": {
       "type": "object",
       "description": "",
@@ -94,8 +333,12 @@
           }
         },
         "http": {
-          "$ref": "#/definitions/istio_HttpRoute",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_HttpRoute",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
+          }
         }
       }
     },
@@ -118,9 +361,13 @@
           }
         },
         "route": {
-          "$ref": "#/definitions/istio_HTTPRouteDestination",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRouteDestination",
-          "required": false
+          "type": "array",
+          "description": "",
+          "required": false,
+          "items": {
+            "$ref": "#/definitions/istio_HTTPRouteDestination",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRouteDestination"
+          }
         }
       },
       "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
@@ -9237,6 +9484,14 @@
     "VirtualServiceList": {
       "$ref": "#/definitions/istio_VirtualServiceList",
       "javaType": "io.fabric8.kubernetes.api.model.apps.istio.VirtualServiceList"
+    },
+    "istio_GateWay": {
+      "$ref": "#/definitions/istio_GateWay",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWay"
+    },
+    "istio_GateWayList": {
+      "$ref": "#/definitions/istio_GateWayList",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.GateWayList"
     }
   },
   "additionalProperties": true
