@@ -499,16 +499,14 @@
           "javaType": "Integer"
         },
         "interval": {
-          "type": "integer",
+          "type": "string",
           "description": "",
-          "required": false,
-          "javaType": "Long"
+          "required": false
         },
         "baseEjectionTime": {
-          "type": "integer",
+          "type": "string",
           "description": "",
-          "required": false,
-          "javaType": "Long"
+          "required": false
         },
         "maxEjectionPercent": {
           "type": "integer",
@@ -569,10 +567,9 @@
           "javaType": "Integer"
         },
         "idleTimeout": {
-          "type": "integer",
+          "type": "string",
           "description": "",
-          "required": true,
-          "javaType": "Long"
+          "required": false
         },
         "h2UpgradePolicy": {
           "type": "string",
@@ -599,10 +596,9 @@
           "javaType": "Integer"
         },
         "connectTimeout": {
-          "type": "integer",
+          "type": "string",
           "description": "",
-          "required": true,
-          "javaType": "Long"
+          "required": false
         },
         "tcpKeepalive": {
           "$ref": "#/definitions/istio_TcpKeepalive",
@@ -622,16 +618,14 @@
           "javaType": "Integer"
         },
         "time": {
-          "type": "integer",
+          "type": "string",
           "description": "",
-          "required": true,
-          "javaType": "Long"
+          "required": false
         },
         "interval": {
-          "type": "integer",
+          "type": "string",
           "description": "",
-          "required": true,
-          "javaType": "Long"
+          "required": false
         }
       },
       "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TcpKeepalive"
@@ -734,10 +728,9 @@
           "required": false
         },
         "ttl": {
-          "type": "integer",
-          "description": "持续时间，两个时间戳之差",
-          "required": true,
-          "javaType": "Long"
+          "type": "string",
+          "description": "",
+          "required": true
         }
       },
       "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPCookie"
@@ -874,8 +867,200 @@
             "$ref": "#/definitions/istio_HttpRoute",
             "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
           }
+        },
+        "tls": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_TLSRoute",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TLSRoute"
+          }
+        },
+        "tcp": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_TCPRoute",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TCPRoute"
+          }
+        },
+        "exportTo": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
         }
+
       }
+    },
+    "istio_TCPRoute": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "match": {
+          "type": "array",
+          "description": "",
+          "required": true,
+          "items": {
+            "$ref": "#/definitions/istio_L4MatchAttributes",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.L4MatchAttributes"
+          }
+        },
+        "route": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_RouteDestination",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.RouteDestination"
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TCPRoute",
+      "required": false
+    },
+    "istio_L4MatchAttributes": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "destinationSubnets": {
+          "type": "array",
+          "description": "",
+          "required": true,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "port": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "sourceLabels": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "gateways": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "sourceNamespace": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.L4MatchAttributes",
+      "required": false
+    },
+
+    "istio_TLSRoute": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "match": {
+          "type": "array",
+          "description": "",
+          "required": true,
+          "items": {
+            "$ref": "#/definitions/istio_TLSMatchAttributes",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TLSMatchAttributes"
+          }
+        },
+        "route": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_RouteDestination",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.RouteDestination"
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TLSRoute",
+      "required": false
+    },
+    "istio_RouteDestination": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "destination": {
+          "$ref": "#/definitions/istio_Destination",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Destination"
+        },
+        "weight": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.RouteDestination",
+      "required": false
+    },
+    "istio_TLSMatchAttributes": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "sniHosts": {
+          "type": "array",
+          "description": "",
+          "required": true,
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "destinationSubnets": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "port": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "sourceLabels": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "gateways": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "sourceNamespace": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.TLSMatchAttributes",
+      "required": false
     },
     "istio_HttpRoute": {
       "type": "object",
@@ -903,9 +1088,276 @@
             "$ref": "#/definitions/istio_HTTPRouteDestination",
             "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRouteDestination"
           }
+        },
+        "redirect": {
+          "$ref": "#/definitions/istio_HTTPRedirect",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRedirect",
+          "required": false
+        },
+        "delegate": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "",
+              "required": false
+            },
+            "namespace": {
+              "type": "string",
+              "description": "",
+              "required": false
+            }
+          }
+        },
+        "rewrite": {
+          "$ref": "#/definitions/istio_HTTPRewrite",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRewrite",
+          "required": false
+        },
+        "timeout": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "retries": {
+          "$ref": "#/definitions/istio_HTTPRetry",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRetry",
+          "required": false
+        },
+        "fault": {
+          "$ref": "#/definitions/istio_HTTPFaultInjection",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPFaultInjection",
+          "required": false
+        },
+        "mirror": {
+          "$ref": "#/definitions/istio_Destination",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Destination",
+          "required": false
+        },
+        "mirrorPercentage": {
+          "$ref": "#/definitions/istio_Percent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Percent",
+          "required": false
+        },
+        "corsPolicy": {
+          "$ref": "#/definitions/istio_CorsPolicy",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.CorsPolicy",
+          "required": false
+        },
+        "headers": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "request": {
+              "$ref": "#/definitions/istio_HeaderOperations",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HeaderOperations",
+              "required": false
+            },
+            "response": {
+              "$ref": "#/definitions/istio_HeaderOperations",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HeaderOperations",
+              "required": false
+            }
+          },
+          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Headers"
+        },
+        "mirrorPercent": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
         }
+
       },
       "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HttpRoute"
+    },
+    "istio_CorsPolicy": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "allowOrigins": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/istio_StringMatch",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+          }
+        },
+        "allowMethods": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "allowHeaders": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "exposeHeaders": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "maxAge": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "allowCredentials": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.CorsPolicy",
+      "required": false
+    },
+    "istio_HTTPFaultInjection": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "delay": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "fixedDelay": {
+              "type": "string",
+              "description": "",
+              "required": false
+            },
+            "percentage": {
+              "$ref": "#/definitions/istio_Percent",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Percent",
+              "required": false
+            },
+            "percent": {
+              "type": "integer",
+              "description": "",
+              "required": false,
+              "javaType": "Integer"
+            }
+          }
+        },
+        "abort": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "httpStatus": {
+              "type": "integer",
+              "description": "",
+              "required": false,
+              "javaType": "Integer"
+            },
+            "percentage": {
+              "$ref": "#/definitions/istio_Percent",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Percent",
+              "required": false
+            }
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPFaultInjection",
+      "required": false
+    },
+    "istio_Percent": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Double"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.Percent",
+      "required": false
+    },
+    "istio_HTTPRetry": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "attempts": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "perTryTimeout": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "retryOn": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "retryRemoteLocalities": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRetry",
+      "required": false
+    },
+    "istio_HTTPRewrite": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "authority": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRewrite",
+      "required": false
+    },
+    "istio_HTTPRedirect": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "authority": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "redirectCode": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.istio.HTTPRedirect",
+      "required": false
     },
     "istio_HTTPRouteDestination": {
       "type": "object",
