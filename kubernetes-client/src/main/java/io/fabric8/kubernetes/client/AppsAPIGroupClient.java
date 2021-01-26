@@ -22,6 +22,8 @@ import io.fabric8.kubernetes.api.model.apps.DoneableReplicaSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableStatefulSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableTidbCluster;
 import io.fabric8.kubernetes.api.model.apps.istio.*;
+
+import io.fabric8.kubernetes.api.model.apps.istio.DoneableDestinationRule;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableGateWay;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableVirtualService;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
@@ -30,6 +32,8 @@ import io.fabric8.kubernetes.client.dsl.MixedOperation;
 import io.fabric8.kubernetes.client.dsl.AppsAPIGroupDSL;
 import io.fabric8.kubernetes.client.dsl.internal.apps.v1.*;
 
+
+import io.fabric8.kubernetes.client.dsl.istio.DestinationRuleOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.GateWayOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.VirtualServiceOperationsImpl;
 import okhttp3.OkHttpClient;
@@ -77,5 +81,9 @@ public class AppsAPIGroupClient extends BaseClient implements AppsAPIGroupDSL {
   @Override
   public MixedOperation<GateWay, GateWayList, DoneableGateWay, RollableScalableResource<GateWay, DoneableGateWay>> gateways() {
     return new GateWayOperationsImpl(httpClient, getConfiguration());
+  }
+
+  public MixedOperation<DestinationRule, DestinationRuleList, DoneableDestinationRule, RollableScalableResource<DestinationRule, DoneableDestinationRule>> destinationRules() {
+    return new DestinationRuleOperationsImpl(httpClient, getConfiguration());
   }
 }
