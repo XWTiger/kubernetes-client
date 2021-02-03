@@ -1465,8 +1465,13 @@
           "required": false
         },
         "uri": {
-          "$ref": "#/definitions/istio_StringMatch",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+          "type": "array",
+          "description": "",
+          "required": false,
+          "items": {
+            "$ref": "#/definitions/istio_StringMatch",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.istio.StringMatch"
+          }
         },
         "scheme": {
           "$ref": "#/definitions/istio_StringMatch",
