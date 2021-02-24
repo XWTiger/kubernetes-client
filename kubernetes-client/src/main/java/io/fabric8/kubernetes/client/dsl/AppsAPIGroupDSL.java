@@ -27,6 +27,9 @@ import io.fabric8.kubernetes.api.model.apps.istio.DoneableDestinationRule;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableGateWay;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableVirtualService;
 import io.fabric8.kubernetes.api.model.apps.DoneableReplicaSet;
+import io.fabric8.kubernetes.api.model.apps.seaweedfs.DoneableSeaweedFS;
+import io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFS;
+import io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSList;
 import io.fabric8.kubernetes.client.Client;
 
 public interface AppsAPIGroupDSL extends Client {
@@ -46,5 +49,7 @@ public interface AppsAPIGroupDSL extends Client {
   MixedOperation<GateWay, GateWayList, DoneableGateWay, RollableScalableResource<GateWay, DoneableGateWay>> gateways();
 
   MixedOperation<DestinationRule, DestinationRuleList, DoneableDestinationRule, RollableScalableResource<DestinationRule, DoneableDestinationRule>> destinationRules();
+
+  MixedOperation<SeaweedFS, SeaweedFSList, DoneableSeaweedFS, RollableScalableResource<SeaweedFS, DoneableSeaweedFS>> seaweeds();
 
 }

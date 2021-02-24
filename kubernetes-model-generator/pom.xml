@@ -119,6 +119,7 @@
             <customAnnotator>io.fabric8.kubernetes.annotator.KubernetesTypeAnnotator</customAnnotator>
             <sourcePaths>
               <sourcePath>${project.basedir}/src/main/resources/schema/kube-schema.json</sourcePath>
+              <sourcePath>${project.basedir}/src/main/resources/schema/sugon-schema.json</sourcePath>
             </sourcePaths>
             <targetPackage>io.fabric8.kubernetes.api.model</targetPackage>
             <includeConstructors>true</includeConstructors>

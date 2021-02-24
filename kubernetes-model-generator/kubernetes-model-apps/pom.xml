@@ -123,6 +123,22 @@
               </artifacts>
             </configuration>
           </execution>
+<!--          <execution>-->
+<!--            <id>attach-artifacts-sugon</id>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>attach-artifact</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <artifacts>-->
+<!--                <artifact>-->
+<!--                  <file>${project.build.outputDirectory}/schema/sugon-schema.json</file>-->
+<!--                  <type>json</type>-->
+<!--                  <classifier>sugon</classifier>-->
+<!--                </artifact>-->
+<!--              </artifacts>-->
+<!--            </configuration>-->
+<!--          </execution>-->
         </executions>
       </plugin>
     </plugins>

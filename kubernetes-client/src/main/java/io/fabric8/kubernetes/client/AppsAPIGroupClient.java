@@ -26,6 +26,9 @@ import io.fabric8.kubernetes.api.model.apps.istio.*;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableDestinationRule;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableGateWay;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableVirtualService;
+import io.fabric8.kubernetes.api.model.apps.seaweedfs.DoneableSeaweedFS;
+import io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFS;
+import io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSList;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
 import io.fabric8.kubernetes.client.dsl.Resource;
 import io.fabric8.kubernetes.client.dsl.MixedOperation;
@@ -36,6 +39,7 @@ import io.fabric8.kubernetes.client.dsl.internal.apps.v1.*;
 import io.fabric8.kubernetes.client.dsl.istio.DestinationRuleOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.GateWayOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.VirtualServiceOperationsImpl;
+import io.fabric8.kubernetes.client.dsl.seaweedfs.SeaweedFSOperationsImpl;
 import okhttp3.OkHttpClient;
 
 public class AppsAPIGroupClient extends BaseClient implements AppsAPIGroupDSL {
@@ -85,5 +89,10 @@ public class AppsAPIGroupClient extends BaseClient implements AppsAPIGroupDSL {
 
   public MixedOperation<DestinationRule, DestinationRuleList, DoneableDestinationRule, RollableScalableResource<DestinationRule, DoneableDestinationRule>> destinationRules() {
     return new DestinationRuleOperationsImpl(httpClient, getConfiguration());
+  }
+
+  @Override
+  public MixedOperation<SeaweedFS, SeaweedFSList, DoneableSeaweedFS, RollableScalableResource<SeaweedFS, DoneableSeaweedFS>> seaweeds() {
+    return new SeaweedFSOperationsImpl(httpClient, getConfiguration());
   }
 }

@@ -1,0 +1,262 @@
+{
+  "id": "http://fabric8.io/fabric8/v2/Schema#",
+  "$schema": "http://json-schema.org/schema#",
+  "$module": "apps",
+  "definitions": {
+    "weed_SeaweedFS": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "seaweed.seaweedfs.com/v1",
+          "required": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "Seaweed",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "kube-schema.json#/definitions/kubernetes_apimachinery_ObjectMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpec"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFS",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.HasMetadata",
+        "io.fabric8.kubernetes.api.model.Namespaced"
+      ]
+    },
+    "weed_SeaweedFSList": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "seaweed.seaweedfs.com/v1",
+          "required": true
+        },
+        "items": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/weed_SeaweedFS",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFS"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "SeaweedFSList",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "kube-schema.json#/definitions/kubernetes_apimachinery_ListMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ListMeta"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSList",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource",
+        "io.fabric8.kubernetes.api.model.KubernetesResourceList\u003cio.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFS\u003e"
+      ]
+    },
+    "weed_SeaweedFSSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "publicIp": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": false
+        },
+        "image": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "volumeServerDiskCount": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "hostSuffix": {
+          "type": "string",
+          "description": "",
+          "default": "seaweed.sample.com",
+          "required": false
+        },
+        "master": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_master",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecMaster"
+        },
+        "volume": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_volume",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecVolume"
+        },
+        "filer": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_filer",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecFiler"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpec",
+      "required": true
+    },
+    "weed_SeaweedFSSpec_master": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "volumeSizeLimitMB": {
+          "type": "integer",
+          "description": "",
+          "default": 1024,
+          "required": false
+        },
+        "service": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_type",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecType"
+        },
+        "requests": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_request",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+        },
+        "limits": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_request",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecMaster",
+      "required": true
+    },
+    "weed_SeaweedFSSpec_volume": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "service": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_type",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecType"
+        },
+        "requests": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_request",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+        },
+        "limits": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_request",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecVolume",
+      "required": true
+    },
+    "weed_SeaweedFSSpec_filer": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "service": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_type",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecType"
+        },
+        "requests": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_request",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+        },
+        "limits": {
+          "$ref": "#/definitions/weed_SeaweedFSSpec_request",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+        },
+        "config": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": false
+        },
+        "s3Config": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": false
+        }
+
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecFiler",
+      "required": true
+    },
+    "weed_SeaweedFSSpec_type": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "",
+          "default": "NodePort",
+          "required": true
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecType"
+    },
+    "weed_SeaweedFSSpec_request": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "storage": {
+          "type": "string",
+          "description": "",
+          "default": "5Gi",
+          "required": false
+        },
+        "cpu": {
+          "type": "string",
+          "description": "",
+          "default": "1",
+          "required": true
+        },
+        "memory": {
+          "type": "string",
+          "description": "",
+          "default": "1Gi",
+          "required": true
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "SeaweedFSList": {
+      "$ref": "#/definitions/weed_SeaweedFSList",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSList"
+    }
+  },
+  "additionalProperties": true
+}
