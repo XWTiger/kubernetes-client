@@ -60,6 +60,12 @@
       <plugin>
         <groupId>org.jsonschema2pojo</groupId>
         <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+        <configuration>
+          <sourcePaths>
+            <sourcePath>${project.basedir}/src/main/resources/schema/sugon-schema.json</sourcePath>
+            <sourcePath>${project.basedir}/src/main/resources/schema/kube-schema.json</sourcePath>
+          </sourcePaths>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -123,22 +129,22 @@
               </artifacts>
             </configuration>
           </execution>
-<!--          <execution>-->
-<!--            <id>attach-artifacts-sugon</id>-->
-<!--            <phase>package</phase>-->
-<!--            <goals>-->
-<!--              <goal>attach-artifact</goal>-->
-<!--            </goals>-->
-<!--            <configuration>-->
-<!--              <artifacts>-->
-<!--                <artifact>-->
-<!--                  <file>${project.build.outputDirectory}/schema/sugon-schema.json</file>-->
-<!--                  <type>json</type>-->
-<!--                  <classifier>sugon</classifier>-->
-<!--                </artifact>-->
-<!--              </artifacts>-->
-<!--            </configuration>-->
-<!--          </execution>-->
+          <execution>
+            <id>attach-artifacts-sugon</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.outputDirectory}/schema/sugon-schema.json</file>
+                  <type>json</type>
+                  <classifier>sugon</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
