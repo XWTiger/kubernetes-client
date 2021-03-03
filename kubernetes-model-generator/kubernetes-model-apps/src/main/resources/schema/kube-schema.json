@@ -2964,23 +2964,8 @@
           "description": ""
         },
         "config": {
-          "type": "object",
-          "description": "",
-          "properties": {
-            "storage": {
-              "type": "object",
-              "description": "",
-              "properties": {
-                "reserve-space": {
-                  "type": "string",
-                  "description": "MB",
-                  "default": "0MB"
-                }
-              },
-              "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemConfigStorage"
-            }
-          },
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemConfig"
+          "type": "string",
+          "description": ""
         },
         "service": {
           "type": "object",
