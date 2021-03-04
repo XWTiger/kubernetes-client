@@ -249,6 +249,495 @@
         }
       },
       "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSSpecRequest"
+    },
+    "click_house": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "clickhouse.altinity.com/v1",
+          "required": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "",
+          "default": "ClickHouseInstallation",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "kube-schema.json#/definitions/kubernetes_apimachinery_ObjectMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/click_house_spec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpec"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouse",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.HasMetadata",
+        "io.fabric8.kubernetes.api.model.Namespaced"
+      ]
+    },
+    "click_house_list": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "",
+          "default": "clickhouse.altinity.com/v1",
+          "required": true
+        },
+        "items": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/click_house",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouse"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "ClickHouseList",
+          "default": "",
+          "required": true
+        },
+        "metadata": {
+          "$ref": "kube-schema.json#/definitions/kubernetes_apimachinery_ListMeta",
+          "javaType": "io.fabric8.kubernetes.api.model.ListMeta"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseList",
+      "javaInterfaces": [
+        "io.fabric8.kubernetes.api.model.KubernetesResource",
+        "io.fabric8.kubernetes.api.model.KubernetesResourceList\u003cio.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouse\u003e"
+      ]
+    },
+    "click_house_spec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "defaults": {
+          "type": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecDefaultsTemplates",
+          "description": "",
+          "required": false,
+          "$ref": "#/definitions/click_house_spec_defaults_templates"
+        },
+        "configuration": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "users": {
+              "type": "object",
+              "description": "",
+              "required": false,
+              "javaType": "java.util.Map\u003cString,String\u003e"
+            },
+            "zookeeper": {
+             "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseZookeeperInfo",
+              "$ref": "#/definitions/click_house_spec_configuration_zookeeper_info"
+            },
+            "clusters": {
+              "description": "",
+              "required": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/click_house_spec_configuration_cluster_info",
+                "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecConfClusterInfo"
+              }
+            }
+          }
+        },
+        "templates": {
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplates",
+          "$ref": "#/definitions/click_house_spec_templates"
+      }
+    }
+  },
+    "click_house_spec_templates": {
+      "type": "object",
+      "description": "",
+      "required": true,
+      "properties": {
+        "volumeClaimTemplates": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplatesVolDetail",
+            "$ref": "#/definitions/click_house_spec_templates_volumeClaimTemplates_detail"
+          }
+        },
+        "podTemplates": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplates",
+            "$ref": "#/definitions/click_house_spec_templates_podTemplates"
+          }
+        },
+        "serviceTemplates": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplates",
+            "$ref": "#/definitions/click_house_spec_templates_serviceTemplates"
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplates"
+    },
+    "click_house_spec_defaults_templates": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "templates": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecDefaultsTemplates"
+    },
+    "click_house_spec_configuration_zookeeper_info": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseZookeeperNodes",
+            "$ref": "#/definitions/click_house_spec_configuration_zookeeper_nodes"
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseZookeeperInfo"
+    },
+    "click_house_spec_configuration_zookeeper_nodes": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "port": {
+          "type": "integer",
+          "description": "",
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseZookeeperNodes"
+    },
+    "click_house_spec_configuration_cluster_info": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "templates": {
+          "type": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecConfClusterTemplates",
+          "description": "",
+          "required": false,
+          "$ref": "#/definitions/click_house_spec_configuration_cluster_templates"
+        },
+        "layout": {
+          "type": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecConfClusterLayout",
+          "description": "",
+          "required": true,
+          "$ref": "#/definitions/click_house_spec_configuration_cluster_layout"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecConfClusterInfo"
+    },
+    "click_house_spec_configuration_cluster_templates": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "templates": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecConfClusterTemplates"
+    },
+    "click_house_spec_configuration_cluster_layout": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "shardsCount": {
+          "type": "integer",
+          "description": "",
+          "required": true
+        },
+        "replicasCount": {
+          "type": "integer",
+          "description": "",
+          "default": 0,
+          "required": false
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecConfClusterLayout"
+    },
+    "click_house_spec_templates_volumeClaimTemplates_detail":{
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "spec": {
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplatesVolSpec",
+          "description": "",
+          "required": true,
+          "$ref": "#/definitions/click_house_spec_templates_volumeClaimTemplates_spec"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplatesVolDetail"
+    },
+    "click_house_spec_templates_volumeClaimTemplates_spec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "accessModes": {
+          "type": "object",
+          "description": "",
+          "required": true,
+          "javaType": "java.util.List\u003cString\u003e"
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "resources": {
+          "properties": {
+            "requests": {
+              "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplatesVolSpecResourceReq",
+              "required": true,
+              "$ref": "#/definitions/click_house_spec_templates_volumeClaimTemplates_spec_resources_request"
+            }
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplatesVolSpec"
+    },
+    "click_house_spec_templates_volumeClaimTemplates_spec_resources_request": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "storage": {
+          "description": "",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecTemplatesVolSpecResourceReq"
+    },
+    "click_house_spec_templates_podTemplates": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "spec": {
+          "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHousePodTemplatesSpec"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplates"
+    },
+    "click_house_spec_templates_podTemplates_spec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplatesContainers",
+            "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec_containers"
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHousePodTemplatesSpec"
+    },
+    "click_house_spec_templates_podTemplates_spec_containers": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "image": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplatesContainersPorts",
+            "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec_containers_ports"
+          }
+        },
+        "volumeMounts": {
+          "type": "array",
+          "items": {
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplatesContainersVolumeMounts",
+            "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec_containers_volumeMounts"
+          }
+        },
+        "resources": {
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ContainerResources",
+          "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec_containers_resources"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplatesContainers"
+    },
+    "click_house_spec_templates_podTemplates_spec_containers_ports": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "containerPort": {
+          "type": "integer",
+          "description": "",
+          "required": true
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplatesContainersPorts"
+    },
+    "click_house_spec_templates_podTemplates_spec_containers_volumeMounts": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "mountPath": {
+          "type": "integer",
+          "description": "",
+          "required": true
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseSpecPodTemplatesContainersVolumeMounts"
+    },
+    "click_house_spec_templates_podTemplates_spec_containers_resources": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "requests": {
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ContainerResourcesDetail",
+          "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec_containers_resources_detail"
+        },
+        "limits": {
+          "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ContainerResourcesDetail",
+          "$ref": "#/definitions/click_house_spec_templates_podTemplates_spec_containers_resources_detail"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ContainerResources"
+    },
+    "click_house_spec_templates_podTemplates_spec_containers_resources_detail": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "",
+          "default": "1",
+          "required": true
+        },
+        "memory": {
+          "type": "string",
+          "description": "",
+          "default": "1Gi",
+          "required": true
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ContainerResourcesDetail"
+    },
+    "click_house_spec_templates_serviceTemplates": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "generateName": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "spec": {
+            "$ref": "#/definitions/click_house_spec_templates_serviceTemplates_spec_ports",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplatesPorts"
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplates"
+    },
+    "click_house_spec_templates_serviceTemplates_spec_ports": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/click_house_spec_templates_serviceTemplates_spec_detail",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplatesPortsDetail"
+          }
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplatesPorts"
+    },
+    "click_house_spec_templates_serviceTemplates_spec_detail": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "port": {
+          "type": "integer",
+          "description": "",
+          "required": true
+        },
+        "protocol": {
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        "targetPort": {
+          "type": "string",
+          "description": "",
+          "required": true
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplatesPortsDetail"
     }
   },
   "type": "object",
@@ -256,6 +745,10 @@
     "SeaweedFSList": {
       "$ref": "#/definitions/weed_SeaweedFSList",
       "javaType": "io.fabric8.kubernetes.api.model.apps.seaweedfs.SeaweedFSList"
+    },
+    "ClickHouseList": {
+      "$ref": "#/definitions/click_house_list",
+      "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseList"
     }
   },
   "additionalProperties": true
