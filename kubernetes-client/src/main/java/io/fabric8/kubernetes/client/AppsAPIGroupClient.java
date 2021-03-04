@@ -21,6 +21,9 @@ import io.fabric8.kubernetes.api.model.apps.DoneableDeployment;
 import io.fabric8.kubernetes.api.model.apps.DoneableReplicaSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableStatefulSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableTidbCluster;
+import io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouse;
+import io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseList;
+import io.fabric8.kubernetes.api.model.apps.clickhouse.DoneableClickHouse;
 import io.fabric8.kubernetes.api.model.apps.istio.*;
 
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableDestinationRule;
@@ -36,6 +39,7 @@ import io.fabric8.kubernetes.client.dsl.AppsAPIGroupDSL;
 import io.fabric8.kubernetes.client.dsl.internal.apps.v1.*;
 
 
+import io.fabric8.kubernetes.client.dsl.internal.clickhouse.ClickHouseOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.DestinationRuleOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.GateWayOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.VirtualServiceOperationsImpl;
@@ -94,5 +98,10 @@ public class AppsAPIGroupClient extends BaseClient implements AppsAPIGroupDSL {
   @Override
   public MixedOperation<SeaweedFS, SeaweedFSList, DoneableSeaweedFS, RollableScalableResource<SeaweedFS, DoneableSeaweedFS>> seaweeds() {
     return new SeaweedFSOperationsImpl(httpClient, getConfiguration());
+  }
+
+  @Override
+  public MixedOperation<ClickHouse, ClickHouseList, DoneableClickHouse, RollableScalableResource<ClickHouse, DoneableClickHouse>> clickhouse() {
+    return new ClickHouseOperationsImpl(httpClient, getConfiguration());
   }
 }

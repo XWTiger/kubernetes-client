@@ -22,6 +22,9 @@ import io.fabric8.kubernetes.api.model.apps.DoneableDaemonSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableDeployment;
 import io.fabric8.kubernetes.api.model.apps.DoneableStatefulSet;
 import io.fabric8.kubernetes.api.model.apps.DoneableTidbCluster;
+import io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouse;
+import io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseList;
+import io.fabric8.kubernetes.api.model.apps.clickhouse.DoneableClickHouse;
 import io.fabric8.kubernetes.api.model.apps.istio.*;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableDestinationRule;
 import io.fabric8.kubernetes.api.model.apps.istio.DoneableGateWay;
@@ -52,4 +55,7 @@ public interface AppsAPIGroupDSL extends Client {
 
   MixedOperation<SeaweedFS, SeaweedFSList, DoneableSeaweedFS, RollableScalableResource<SeaweedFS, DoneableSeaweedFS>> seaweeds();
 
-}
+  MixedOperation<ClickHouse, ClickHouseList, DoneableClickHouse, RollableScalableResource<ClickHouse, DoneableClickHouse>> clickhouse();
+
+
+  }
