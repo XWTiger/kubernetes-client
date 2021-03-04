@@ -39,7 +39,7 @@ import io.fabric8.kubernetes.client.dsl.AppsAPIGroupDSL;
 import io.fabric8.kubernetes.client.dsl.internal.apps.v1.*;
 
 
-import io.fabric8.kubernetes.client.dsl.internal.clickhouse.ClickHouseOperationsImpl;
+import io.fabric8.kubernetes.client.dsl.clickhouse.ClickHouseOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.DestinationRuleOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.GateWayOperationsImpl;
 import io.fabric8.kubernetes.client.dsl.istio.VirtualServiceOperationsImpl;

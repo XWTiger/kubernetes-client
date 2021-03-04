@@ -1,4 +1,4 @@
-package io.fabric8.kubernetes.client.dsl.internal.clickhouse;
+package io.fabric8.kubernetes.client.dsl.clickhouse;
 
 import io.fabric8.kubernetes.api.model.Status;
 import io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouse;
