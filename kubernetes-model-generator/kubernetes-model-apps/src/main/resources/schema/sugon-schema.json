@@ -648,7 +648,7 @@
           "required": true
         },
         "mountPath": {
-          "type": "integer",
+          "type": "string",
           "description": "",
           "required": true
         }
@@ -720,6 +720,12 @@
             "$ref": "#/definitions/click_house_spec_templates_serviceTemplates_spec_detail",
             "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplatesPortsDetail"
           }
+        },
+        "type": {
+          "type": "string",
+          "default": "NodePort",
+          "required": true,
+          "description": ""
         }
       },
       "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ServiceTemplatesPorts"
