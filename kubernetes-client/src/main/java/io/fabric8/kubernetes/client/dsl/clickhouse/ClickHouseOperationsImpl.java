@@ -27,7 +27,7 @@ public class ClickHouseOperationsImpl extends RollableScalableResourceOperation<
   public ClickHouseOperationsImpl(RollingOperationContext context) {
     super(context.withApiGroupName("clickhouse.altinity.com")
       .withApiGroupVersion("clickhouse.altinity.com/v1")
-      .withPlural("clickhouse"));
+      .withPlural("clickhouseinstallations"));
     this.type=ClickHouse.class;
     this.listType=ClickHouseList.class;
     this.doneableType = DoneableClickHouse.class;
