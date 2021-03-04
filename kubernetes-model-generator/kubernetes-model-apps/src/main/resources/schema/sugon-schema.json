@@ -344,6 +344,12 @@
               "required": false,
               "javaType": "java.util.Map\u003cString,String\u003e"
             },
+            "profiles": {
+              "type": "object",
+              "description": "",
+              "required": false,
+              "javaType": "java.util.Map\u003cString,String\u003e"
+            },
             "zookeeper": {
              "javaType": "io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseZookeeperInfo",
               "$ref": "#/definitions/click_house_spec_configuration_zookeeper_info"
