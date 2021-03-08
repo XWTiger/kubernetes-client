@@ -2901,10 +2901,9 @@
           "default": true,
           "required": true
         },
-        "configUpdateStrategy": {
+        "serviceAccount": {
           "type": "string",
           "description": "",
-          "default": "RollingUpdate",
           "required": true
         },
         "helper": {
@@ -2912,21 +2911,577 @@
           "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterHelper"
         },
         "discovery": {
-          "type": "any",
-          "description": ""
+          "$ref": "#/definitions/kubernetes_apps_TidbDiscovery",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterDiscovery"
         },
         "pd": {
-          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
-        },
-        "tikv": {
-          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
+          "$ref": "#/definitions/kubernetes_apps_TidbPDSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbPDSpec"
         },
         "tidb": {
-          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
+          "$ref": "#/definitions/kubernetes_apps_TidbTiDBSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTiDBSpec"
+        },
+        "tikv": {
+          "$ref": "#/definitions/kubernetes_apps_TiKVSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TiKVSpec"
+        },
+        "tiflash": {
+          "$ref": "#/definitions/kubernetes_apps_TiFlashSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TiFlashSpec"
+        },
+        "ticdc": {
+          "$ref": "#/definitions/kubernetes_apps_TiCDCSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TiCDCSpec"
+        },
+        "pump": {
+          "$ref": "#/definitions/kubernetes_apps_PumpSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.PumpSpec"
+        },
+        "paused": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "schedulerName": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "imagePullPolicy": {
+          "type": "string",
+          "description": ""
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_LocalObjectReference",
+            "javaType": "io.fabric8.kubernetes.api.model.LocalObjectReference"
+          }
+        },
+        "configUpdateStrategy": {
+          "$ref": "#/definitions/kubernetes_core_ConfigUpdateStrategy",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbConfigUpdateStrategy"
+        },
+        "enablePVReclaim": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "tlsCluster": {
+          "type": "object",
+          "description": "",
+          "enabled": {
+            "number": {
+              "type": "boolean",
+              "description": "",
+              "required": false,
+              "javaType": "Boolean"
+            }
+          }
+        },
+        "hostNetwork": {
+          "type": "object",
+          "description": "",
+          "javaType": "Boolean"
+        },
+        "affinity": {
+          "$ref": "#/definitions/kubernetes_core_Affinity",
+          "javaType": "io.fabric8.kubernetes.api.model.Affinity"
+        },
+        "priorityClassName": {
+          "type": "string",
+          "description": ""
+        },
+        "nodeSelector": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "annotations": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "tolerations": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_Toleration",
+            "javaType": "io.fabric8.kubernetes.api.model.Toleration"
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_TidbService",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.TidbService"
+          }
+        },
+        "clusterDomain": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "TidbClusterRef": {
+          "$ref": "#/definitions/kubernetes_apps_TidbClusterRef",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterRef"
+        },
+        "pdAddresses": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "statefulSetUpdateStrategy": {
+          "$ref": "#/definitions/kubernetes_apps_StatefulSetUpdateStrategy",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.StatefulSetUpdateStrategy"
         }
       },
       "additionalProperties": true,
       "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterSpec"
+    },
+    "kubernetes_apps_TidbClusterRef": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "clusterDomain": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterRef"
+    },
+    "kubernetes_core_TidbService": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "type": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbService"
+    },
+    "kubernetes_apps_PumpSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ComponentSpec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbComponent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+        },
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "config": {
+          "type": "string",
+          "description": ""
+        },
+        "setTimeZone": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.PumpSpec"
+    },
+    "kubernetes_apps_TiCDCSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ComponentSpec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbComponent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+        },
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "config": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "timezone": {
+              "type": "string",
+              "description": "",
+              "default": "UTC",
+              "required": false
+            },
+            "gcTTL": {
+              "type": "integer",
+              "default": 86400,
+              "description": "",
+              "required": false,
+              "javaType": "Integer"
+            },
+            "logLevel": {
+              "type": "string",
+              "description": "",
+              "default": "info",
+              "required": false
+            },
+            "logFile": {
+              "type": "string",
+              "description": "",
+              "default": "/dev/stderr",
+              "required": false
+            }
+          },
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TiCDCConfig"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TiCDCSpec"
+    },
+    "kubernetes_apps_TiFlashSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ComponentSpec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbComponent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+        },
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "privileged": {
+          "type": "boolean",
+          "description": ""
+        },
+        "maxFailoverCount": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "storageClaims": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_apps_TidbStorageClaim",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.TidbStorageClaim"
+          }
+        },
+        "config": {
+          "$ref": "#/definitions/kubernetes_apps_TiFlashConfigWraper",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TiFlashConfigWraper"
+        },
+        "logTailer": {
+          "$ref": "#/definitions/kubernetes_apps_TidbLogTailerSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbLogTailerSpec"
+        },
+        "recoverFailover": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TiFlashSpec"
+    },
+    "kubernetes_apps_TiFlashConfigWraper": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": ""
+        },
+        "proxy": {
+          "type": "string",
+          "description": ""
+        }
+      },
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TiFlashConfigWraper"
+    },
+    "kubernetes_apps_TidbStorageClaim": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "resources": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbStorageClaim"
+    },
+    "kubernetes_apps_TiKVSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ComponentSpec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbComponent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+        },
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "privileged": {
+          "type": "boolean",
+          "description": ""
+        },
+        "maxFailoverCount": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "separateRocksDBLog": {
+          "type": "boolean",
+          "description": ""
+        },
+        "separateRaftLog": {
+          "type": "boolean",
+          "description": ""
+        },
+        "logTailer": {
+          "$ref": "#/definitions/kubernetes_apps_TidbLogTailerSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbLogTailerSpec"
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "",
+          "default": ""
+        },
+        "dataSubDir": {
+          "type": "string",
+          "description": "",
+          "default": ""
+        },
+        "config": {
+          "type": "string",
+          "description": ""
+        },
+        "recoverFailover": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "mountClusterClientSecret": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "evictLeaderTimeout": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "storageVolumes": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_apps_TidbStorageVolume",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.StorageVolume"
+          }
+        },
+        "storeLabels": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TiKVSpec"
+    },
+    "kubernetes_apps_TidbLogTailerSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbLogTailerSpec"
+    },
+    "kubernetes_apps_TiDBProbe": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "",
+          "required": false
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TiDBProbe"
+    },
+    "kubernetes_apps_TidbTLSClient": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTLSClient"
+    },
+    "kubernetes_apps_TidbSlowLogTailer": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "image": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "imagePullPolicy": {
+          "type": "string",
+          "description": ""
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbSlowLogTailer"
+    },
+    "kubernetes_apps_TidbDiscovery": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        }
+      },
+      "required": true,
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterDiscovery"
     },
     "kubernetes_apps_TidbHelper": {
       "type": "object",
@@ -2937,16 +3492,175 @@
           "description": "",
           "default": "busybox:1.26.2",
           "required": true
+        },
+        "imagePullPolicy": {
+          "type": "string",
+          "description": ""
         }
       },
       "required": true,
       "additionalProperties": true,
       "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterHelper"
     },
-    "kubernetes_apps_TidbContentTemplate": {
+    "kubernetes_apps_TidbTiDBSpec": {
       "type": "object",
       "description": "",
       "properties": {
+        "ComponentSpec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbComponent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+        },
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "service": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "ServiceSpec": {
+              "$ref": "#/definitions/kubernetes_apps_TidbServiceSpec",
+              "javaType": "io.fabric8.kubernetes.api.model.apps.TidbServiceSpec"
+            },
+            "externalTrafficPolicy": {
+              "type": "string",
+              "description": ""
+            },
+            "exposeStatus": {
+              "type": "boolean",
+              "description": "",
+              "required": false,
+              "javaType": "Boolean"
+            },
+            "mysqlNodePort": {
+              "type": "integer",
+              "description": "",
+              "required": false,
+              "javaType": "Integer"
+            },
+            "statusNodePort": {
+              "type": "integer",
+              "description": "",
+              "required": false,
+              "javaType": "Integer"
+            },
+            "additionalPorts": {
+              "type": "array",
+              "description": "",
+              "javaOmitEmpty": true,
+              "items": {
+                "$ref": "#/definitions/kubernetes_core_ServicePort",
+                "javaType": "io.fabric8.kubernetes.api.model.ServicePort"
+              }
+            }
+          },
+          "additionalProperties": true,
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTiDBServiceSpec"
+        },
+        "binlogEnabled": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "maxFailoverCount": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "separateSlowLog": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "slowLogVolumeName": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "slowLogTailer": {
+          "$ref": "#/definitions/kubernetes_apps_TidbSlowLogTailer",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbSlowLogTailer"
+        },
+        "tlsClient": {
+          "$ref": "#/definitions/kubernetes_apps_TidbTLSClient",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTLSClient"
+        },
+        "plugins": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        },
+        "config": {
+          "type": "string",
+          "description": ""
+        },
+        "lifecycle": {
+          "$ref": "#/definitions/kubernetes_core_Lifecycle",
+          "javaType": "io.fabric8.kubernetes.api.model.Lifecycle"
+        },
+        "storageVolumes": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_apps_TidbStorageVolume",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.StorageVolume"
+          }
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": ""
+        },
+        "readinessProbe": {
+          "$ref": "#/definitions/kubernetes_apps_TiDBProbe",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TiDBProbe"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTiDBSpec"
+    },
+    "kubernetes_apps_TidbPDSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ComponentSpec": {
+          "$ref": "#/definitions/kubernetes_apps_TidbComponent",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+        },
+        "ResourceRequirements": {
+          "$ref": "#/definitions/kubernetes_core_ResourceRequirements",
+          "javaType": "io.fabric8.kubernetes.api.model.ResourceRequirements"
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
         "baseImage": {
           "type": "string",
           "description": "",
@@ -2968,35 +3682,281 @@
           "description": ""
         },
         "service": {
-          "type": "object",
-          "description": "",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "",
-              "default": "ClusterIP"
-            }
-          },
-          "additionalProperties": true,
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbService"
+          "$ref": "#/definitions/kubernetes_apps_TidbServiceSpec",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbServiceSpec"
         },
-        "requests":{
-          "type": "object",
+        "maxFailoverCount": {
+          "type": "integer",
           "description": "",
-          "properties": {
-            "storage": {
-              "type": "string",
-              "description": "",
-              "default": "1Gi",
-              "required": true
-            }
-          },
-          "additionalProperties": true,
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbRequests"
+          "required": false,
+          "javaType": "Integer"
+        },
+        "storageVolumes": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_apps_TidbStorageVolume",
+            "javaType": "io.fabric8.kubernetes.api.model.apps.StorageVolume"
+          }
+        },
+        "dataSubDir": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "tlsClientSecretName": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "enableDashboardInternalProxy": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "mountClusterClientSecret": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
         }
       },
       "additionalProperties": true,
-      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemplate"
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbPDSpec"
+    },
+    "kubernetes_apps_TidbServiceSpec": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "",
+          "default": "ClusterIP"
+        },
+        "annotations": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "loadBalancerIP": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "clusterIP": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "portName": {
+          "type": "string",
+          "description": "",
+          "required": false
+        },
+        "loadBalancerSourceRanges": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "string",
+            "description": "",
+            "javaType": "String"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbService"
+    },
+    "kubernetes_apps_TidbStorageVolume": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "",
+          "default": ""
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "",
+          "default": ""
+        },
+        "storageSize": {
+          "type": "string",
+          "description": ""
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "",
+          "default": ""
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.StorageVolume"
+    },
+    "kubernetes_apps_TidbComponent": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "version": {
+          "type": "string",
+          "description": "",
+          "default": ""
+        },
+        "imagePullPolicy": {
+          "type": "string",
+          "description": ""
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_LocalObjectReference",
+            "javaType": "io.fabric8.kubernetes.api.model.LocalObjectReference"
+          }
+        },
+        "hostNetwork": {
+          "type": "object",
+          "description": "",
+          "javaType": "Boolean"
+        },
+        "affinity": {
+          "$ref": "#/definitions/kubernetes_core_Affinity",
+          "javaType": "io.fabric8.kubernetes.api.model.Affinity"
+        },
+        "priorityClassName": {
+          "type": "string",
+          "description": ""
+        },
+        "schedulerName": {
+          "type": "string",
+          "description": ""
+        },
+        "nodeSelector": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "annotations": {
+          "type": "object",
+          "description": "",
+          "required": false,
+          "javaType": "java.util.Map\u003cString,String\u003e"
+        },
+        "tolerations": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_Toleration",
+            "javaType": "io.fabric8.kubernetes.api.model.Toleration"
+          }
+        },
+        "podSecurityContext": {
+          "$ref": "#/definitions/kubernetes_core_PodSecurityContext",
+          "javaType": "io.fabric8.kubernetes.api.model.PodSecurityContext"
+        },
+        "configUpdateStrategy": {
+          "$ref": "#/definitions/kubernetes_core_ConfigUpdateStrategy",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbConfigUpdateStrategy"
+        },
+        "env": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_EnvVar",
+            "javaType": "io.fabric8.kubernetes.api.model.EnvVar"
+          }
+        },
+        "initContainers": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_Container",
+            "javaType": "io.fabric8.kubernetes.api.model.Container"
+          }
+        },
+        "additionalContainers": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_Container",
+            "javaType": "io.fabric8.kubernetes.api.model.Container"
+          }
+        },
+        "additionalVolumes": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_Volume",
+            "javaType": "io.fabric8.kubernetes.api.model.Volume"
+          }
+        },
+        "additionalVolumeMounts": {
+          "type": "array",
+          "description": "",
+          "javaOmitEmpty": true,
+          "items": {
+            "$ref": "#/definitions/kubernetes_core_VolumeMount",
+            "javaType": "io.fabric8.kubernetes.api.model.VolumeMount"
+          }
+        },
+        "terminationGracePeriodSeconds": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        },
+        "statefulSetUpdateStrategy": {
+          "$ref": "#/definitions/kubernetes_apps_StatefulSetUpdateStrategy",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.StatefulSetUpdateStrategy"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbComponent"
+    },
+    "kubernetes_core_ConfigUpdateStrategy": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "",
+          "required": false,
+          "javaType": "Boolean"
+        },
+        "capacityMb": {
+          "type": "float",
+          "description": "",
+          "required": false,
+          "javaType": "Float"
+        },
+        "admissionMaxResultMb": {
+          "type": "float",
+          "description": "",
+          "required": false,
+          "javaType": "Float"
+        },
+        "admissionMinProcessMs": {
+          "type": "integer",
+          "description": "",
+          "required": false,
+          "javaType": "Integer"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbConfigUpdateStrategy"
     },
     "kubernetes_apps_Deployment": {
       "type": "object",
