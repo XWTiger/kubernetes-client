@@ -2915,16 +2915,13 @@
           "javaType": "io.fabric8.kubernetes.api.model.apps.TidbClusterDiscovery"
         },
         "pd": {
-          "$ref": "#/definitions/kubernetes_apps_TidbPDSpec",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbPDSpec"
-        },
-        "tidb": {
-          "$ref": "#/definitions/kubernetes_apps_TidbTiDBSpec",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTiDBSpec"
+          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
         },
         "tikv": {
-          "$ref": "#/definitions/kubernetes_apps_TiKVSpec",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TiKVSpec"
+          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
+        },
+        "tidb": {
+          "$ref": "#/definitions/kubernetes_apps_TidbContentTemplate"
         },
         "tiflash": {
           "$ref": "#/definitions/kubernetes_apps_TiFlashSpec",
@@ -3336,6 +3333,10 @@
           "default": 1,
           "required": true
         },
+        "requests":{
+          "$ref": "#/definitions/kubernetes_apps_TidbComponentRequestTemplate",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbRequests"
+        },
         "privileged": {
           "type": "boolean",
           "description": ""
@@ -3409,6 +3410,93 @@
       },
       "additionalProperties": true,
       "javaType": "io.fabric8.kubernetes.api.model.apps.TiKVSpec"
+    },
+    "kubernetes_apps_TidbContentTemplate": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "baseImage": {
+          "type": "string",
+          "description": "",
+          "default": "",
+          "required": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "",
+          "default": 1,
+          "required": true
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": ""
+        },
+        "config": {
+          "type": "string",
+          "description": ""
+        },
+        "service": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "",
+              "default": "ClusterIP"
+            }
+          },
+          "additionalProperties": true,
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbService"
+        },
+        "requests":{
+          "type": "object",
+          "description": "",
+          "properties": {
+            "storage": {
+              "type": "string",
+              "description": "",
+              "default": "1Gi",
+              "required": true
+            },
+            "cpu": {
+              "type": "string",
+              "description": "",
+              "default": "1000m",
+              "required": false
+            },
+            "memory": {
+              "type": "string",
+              "description": "",
+              "default": "1Gi",
+              "required": false
+            }
+          },
+          "additionalProperties": true,
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbRequests"
+        },
+        "limits":{
+          "type": "object",
+          "description": "",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "",
+              "default": "1000m",
+              "required": false
+            },
+            "memory": {
+              "type": "string",
+              "description": "",
+              "default": "1Gi",
+              "required": false
+            }
+          },
+          "additionalProperties": true,
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbLimits"
+        }
+      },
+      "additionalProperties": true,
+      "javaType": "io.fabric8.kubernetes.api.model.apps.TidbTemplate"
     },
     "kubernetes_apps_TidbLogTailerSpec": {
       "type": "object",
@@ -3531,6 +3619,10 @@
           "description": "",
           "default": 1,
           "required": true
+        },
+        "requests":{
+          "$ref": "#/definitions/kubernetes_apps_TidbComponentRequestTemplate",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbRequests"
         },
         "service": {
           "type": "object",
@@ -3666,6 +3758,10 @@
           "description": "",
           "default": "",
           "required": true
+        },
+        "requests":{
+          "$ref": "#/definitions/kubernetes_apps_TidbComponentRequestTemplate",
+          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbRequests"
         },
         "replicas": {
           "type": "integer",
