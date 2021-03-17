@@ -2960,8 +2960,9 @@
           }
         },
         "configUpdateStrategy": {
-          "$ref": "#/definitions/kubernetes_core_ConfigUpdateStrategy",
-          "javaType": "io.fabric8.kubernetes.api.model.apps.TidbConfigUpdateStrategy"
+          "type": "string",
+          "description": "",
+          "required": false
         },
         "enablePVReclaim": {
           "type": "boolean",
