@@ -6,10 +6,7 @@ import io.fabric8.kubernetes.api.model.apps.clickhouse.ClickHouseList;
 import io.fabric8.kubernetes.api.model.apps.clickhouse.DoneableClickHouse;
 import io.fabric8.kubernetes.api.model.extensions.DeploymentRollback;
 import io.fabric8.kubernetes.client.Config;
-import io.fabric8.kubernetes.client.dsl.ImageEditReplacePatchable;
-import io.fabric8.kubernetes.client.dsl.LogWatch;
-import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
-import io.fabric8.kubernetes.client.dsl.TimeoutImageEditReplacePatchable;
+import io.fabric8.kubernetes.client.dsl.*;
 import io.fabric8.kubernetes.client.dsl.base.BaseOperation;
 import io.fabric8.kubernetes.client.dsl.base.OperationContext;
 import io.fabric8.kubernetes.client.dsl.internal.RollingOperationContext;
@@ -145,4 +142,11 @@ public class ClickHouseOperationsImpl extends RollableScalableResourceOperation<
   public Status rollback(DeploymentRollback deploymentRollback) {
     return null;
   }
+
+  @Override
+  public NonNamespaceOperation<ClickHouse, ClickHouseList, DoneableClickHouse, RollableScalableResource<ClickHouse, DoneableClickHouse>> inNamespace(String namespace) {
+    return super.inNamespace(namespace);
+  }
+
+
 }
